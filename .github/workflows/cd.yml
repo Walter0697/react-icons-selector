@@ -1,0 +1,53 @@
+name: Continuous Deployment
+
+on:
+  workflow_run:
+    workflows: ["Continuous Integration"]
+    types:
+      - completed
+    branches: [main]
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  cd:
+    name: Deploy
+    # Only run if the CI workflow was successful
+    if: ${{ github.event.workflow_run.conclusion == 'success' || startsWith(github.ref, 'refs/tags/v') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build
+        run: npm run build
+      
+      # Only run the publishing steps when a version tag is pushed
+      - name: Extract version from tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+      
+      - name: Check version matches package.json
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          if [ "${{ steps.get_version.outputs.VERSION }}" != "$PACKAGE_VERSION" ]; then
+            echo "Error: Git tag version (${{ steps.get_version.outputs.VERSION }}) does not match package.json version ($PACKAGE_VERSION)"
+            exit 1
+          fi
+      
+      - name: Publish to npm
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} 
