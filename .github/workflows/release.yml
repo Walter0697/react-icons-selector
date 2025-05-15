@@ -54,7 +54,7 @@ jobs:
         run: |
           # Set remote URL with PAT for push permissions
           git remote set-url origin https://${{ secrets.RELEASE_TOKEN }}@github.com/${{ github.repository }}.git
-          git push --follow-tags origin main
+          git push --follow-tags origin master
         shell: /usr/bin/bash -e {0}
         env:
           NPM_CONFIG_USERCONFIG: /home/runner/work/_temp/.npmrc
