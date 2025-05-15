@@ -48,7 +48,7 @@ jobs:
       
       - name: Push changes to GitHub
         run: |
-          git push --follow-tags origin main
+          git push --follow-tags origin master
       
       - name: Build library
         run: npm run build
