@@ -12,7 +12,11 @@
   "scripts": {
     "prebuild": "tsc --declaration --emitDeclarationOnly --outDir dist/types",
     "build": "rollup -c",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "release": "standard-version",
+    "release:patch": "standard-version --release-as patch",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major"
   },
   "peerDependencies": {
     "react": "^17.0.0 || ^18.0.0",
@@ -30,7 +34,8 @@
     "postcss": "^8.5.3",
     "postcss-import": "^16.1.0",
     "rollup-plugin-dts": "^6.2.1",
-    "rollup-plugin-peer-deps-external": "^2.2.4"
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "standard-version": "^9.5.0"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.13",
