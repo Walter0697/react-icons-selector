@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://github.com/Walter0697/react-icons-select/compare/v0.0.6...v0.0.7) (2025-05-15)
+
+
+### Bug Fixes
+
+* fixing issue for search bar in dialog ([35944d9](https://github.com/Walter0697/react-icons-select/commit/35944d971a098b0ed51c8c384ac3bda5c1a7ae49))
+
 ### [0.0.6](https://github.com/Walter0697/react-icons-select/compare/v0.0.3...v0.0.6) (2025-05-15)
 
 
