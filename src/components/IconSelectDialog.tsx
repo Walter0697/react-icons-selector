@@ -38,14 +38,13 @@ export const IconSelectDialog: React.FC<IconSelectDialogProps> = ({
   
   // Get icons to display based on current state
   const getIconsToDisplay = () => {
+    if (searchTerm.trim() === '' && !selectedPack) {
+      return iconOptions ?? defaultIconOptions;
+    }
+    
     // If search term is provided, filter icons by search
     if (searchTerm.trim() !== '') {
       return searchIcons(searchTerm, maxResults, selectedPack);
-    }
-    
-    // If custom icon options are provided, use those
-    if (iconOptions) {
-      return iconOptions;
     }
     
     // If a specific pack is selected, show top N icons from that pack
@@ -97,6 +96,13 @@ export const IconSelectDialog: React.FC<IconSelectDialogProps> = ({
   const handleLibrarySelect = (packName: string | undefined) => {
     setSelectedPack(packName);
     setSearchTerm(''); // Clear search when changing libraries
+    
+    // Force update icons based on the newly selected pack
+    const updatedIcons = packName 
+      ? searchIcons('', maxResults, packName)
+      : defaultIconOptions;
+    
+    setFilteredIcons(updatedIcons);
   };
 
   return (

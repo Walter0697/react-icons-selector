@@ -109,7 +109,7 @@ export function searchIcons(searchTerm: string, limit?: number, packPrefix?: str
     }
   }
   
-  // If a specific pack is specified, only search that pack
+  // If a specific pack is specified, use it regardless of search term
   if (packPrefix && iconPacks[packPrefix]) {
     const pack = iconPacks[packPrefix];
     results = Object.keys(pack)
