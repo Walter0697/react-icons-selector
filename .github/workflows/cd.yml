@@ -5,7 +5,7 @@ on:
     workflows: ["Continuous Integration"]
     types:
       - completed
-    branches: [main]
+    branches: [main, master]
   push:
     tags:
       - 'v*'
