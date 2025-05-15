@@ -1,49 +1,39 @@
 # React Icons Selector
 
 <p align="center">
-  <img src="./assets/banner.svg" alt="React Icons Selector" width="800" />
+  <img src="./assets/icon.png" alt="React Icons Selector" width="800" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/npm/v/ReactIconsSelect" alt="npm version" />
-  <img src="https://img.shields.io/bundlephobia/minzip/ReactIconsSelect" alt="bundle size" />
-  <img src="https://img.shields.io/npm/l/ReactIconsSelect" alt="license" />
+  <img src="https://img.shields.io/npm/v/react-icons-select" alt="npm version" />
+  <img src="https://img.shields.io/bundlephobia/minzip/react-icons-select" alt="bundle size" />
+  <img src="https://img.shields.io/npm/l/react-icons-select" alt="license" />
   <img src="https://img.shields.io/github/actions/workflow/status/waltercheng/react-icons-select/main.yml" alt="build status" />
-  <img src="https://img.shields.io/npm/dm/ReactIconsSelect" alt="downloads" />
+  <img src="https://img.shields.io/npm/dm/react-icons-select" alt="downloads" />
 </p>
 
 A modern, lightweight React component for selecting icons from the popular [react-icons](https://react-icons.github.io/react-icons/) library.
 
 ## Motivation
 
-While there are other icon selector libraries available, many have become outdated or lack support for the latest React versions and icon sets. This library was created to provide a modern, actively maintained alternative with support for:
+Most existing icon selector libraries are either abandoned, broken with newer React versions, or missing support for the latest icon sets. After hitting too many walls trying to use them in modern projects, I thought "I'll do it myself" and created this library with support for:
 
 - All 30+ icon packs from react-icons
 - Modern React (17+) and TypeScript
 - Lightweight with minimal dependencies
 - Responsive design and accessibility
 
-## Features
-
-- 🔍 Search through entire icon library or filter by specific pack
-- 🎨 Consistent icon sizing and styling
-- 📱 Responsive design for all screen sizes
-- 📦 Lightweight with minimal dependencies
-- 🌐 Support for all react-icons libraries (30+ icon packs)
-- 🎛️ Customizable result limits and default options
-- 🎯 TypeScript support with full type definitions
-
 ## Installation
 
 ```bash
 # npm
-npm install ReactIconsSelect react-icons
+npm install react-icons-select
 
 # yarn
-yarn add ReactIconsSelect react-icons
+yarn add react-icons-select
 
 # pnpm
-pnpm add ReactIconsSelect react-icons
+pnpm add react-icons-select
 ```
 
 Note: `react-icons` is a peer dependency and needs to be installed separately.
@@ -54,18 +44,18 @@ Note: `react-icons` is a peer dependency and needs to be installed separately.
 
 ```jsx
 import React, { useState } from 'react';
-import { IconSelectorDialog } from 'ReactIconsSelect';
-import { IconComponent } from 'ReactIconsSelect';
+import ReactIconsSelect from 'react-icons-select';
+import { IconComponent } from 'react-icons-select';
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
   const [selectedIcon, setSelectedIcon] = useState('');
 
   return (
     <div>
-      <button onClick={() => setIsOpen(true)}>
-        Select Icon
-      </button>
+      <ReactIconsSelect
+        value={selectedIcon}
+        onChange={setSelectedIcon}
+      />
       
       {selectedIcon && (
         <div>
@@ -73,13 +63,6 @@ function App() {
           {selectedIcon}
         </div>
       )}
-      
-      <IconSelectorDialog
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        value={selectedIcon}
-        onChange={setSelectedIcon}
-      />
     </div>
   );
 }
@@ -89,24 +72,16 @@ function App() {
 
 ```jsx
 import React, { useState } from 'react';
-import { IconSelectorDialog } from 'ReactIconsSelect';
-import { IconComponent } from 'ReactIconsSelect';
+import ReactIconsSelect from 'react-icons-select';
 
 const MY_FAVORITE_ICONS = ["FaReact", "FaGithub", "MdDarkMode", "BiCodeBlock"];
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
   const [selectedIcon, setSelectedIcon] = useState('');
 
   return (
     <div>
-      <button onClick={() => setIsOpen(true)}>
-        Select Icon
-      </button>
-      
-      <IconSelectorDialog
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
+      <ReactIconsSelect
         value={selectedIcon}
         onChange={setSelectedIcon}
         iconOptions={MY_FAVORITE_ICONS}
@@ -117,19 +92,183 @@ function App() {
 }
 ```
 
+## Custom Styling
+
+You can customize the button appearance using the `buttonStyle` prop:
+
+```jsx
+import React, { useState } from 'react';
+import ReactIconsSelect, { ButtonStyleProps } from 'react-icons-select';
+
+function App() {
+  const [selectedIcon, setSelectedIcon] = useState('');
+  
+  // Custom button styling
+  const customStyle = {
+    box: {
+      backgroundColor: '#f0f9ff',
+      border: '2px solid #0ea5e9',
+      borderRadius: '8px',
+      width: 100,
+      height: 100,
+    },
+    icon: {
+      marginBottom: '8px',
+    },
+    text: {
+      color: '#0284c7',
+      fontSize: '0.7rem',
+      fontWeight: 'bold',
+    }
+  };
+  
+  return (
+    <div>
+      <ReactIconsSelect 
+        value={selectedIcon} 
+        onChange={setSelectedIcon}
+        buttonStyle={customStyle}
+      />
+    </div>
+  );
+}
+```
+
+## Dark Mode
+
+The component supports dark mode:
+
+```jsx
+import React, { useState } from 'react';
+import ReactIconsSelect from 'react-icons-select';
+
+function App() {
+  const [selectedIcon, setSelectedIcon] = useState('');
+  
+  return (
+    <div>
+      <ReactIconsSelect 
+        value={selectedIcon} 
+        onChange={setSelectedIcon}
+        darkMode={true}
+      />
+    </div>
+  );
+}
+```
+
+You can also let it automatically detect the system's dark mode preference by not providing the `darkMode` prop.
+
+### Hide Library Selection
+
+If you want to hide the library selection filter:
+
+```jsx
+import React, { useState } from 'react';
+import ReactIconsSelect from 'react-icons-select';
+
+function App() {
+  const [selectedIcon, setSelectedIcon] = useState('');
+  
+  return (
+    <div>
+      <ReactIconsSelect 
+        value={selectedIcon} 
+        onChange={setSelectedIcon}
+        showLibrarySelection={false}
+      />
+    </div>
+  );
+}
+```
+
+This will show a cleaner interface with just the search and icons grid.
+
+### Custom Default Icons
+
+You can specify your own set of default icons to display in the dialog:
+
+```jsx
+import React, { useState } from 'react';
+import ReactIconsSelect from 'react-icons-select';
+
+function App() {
+  const [selectedIcon, setSelectedIcon] = useState('');
+  
+  // Custom default icons
+  const myFavoriteIcons = [
+    'FaReact', 
+    'FaJs', 
+    'FaHtml5', 
+    'FaCss3', 
+    'FaGithub', 
+    'FaNode'
+  ];
+  
+  return (
+    <div>
+      <ReactIconsSelect 
+        value={selectedIcon} 
+        onChange={setSelectedIcon}
+        defaultIconOptions={myFavoriteIcons}
+      />
+    </div>
+  );
+}
+```
+
+This will display your preferred set of icons when the dialog first opens, instead of the library's default selection.
+
+### Custom Results Limit
+
+You can control the maximum number of search results displayed:
+
+```jsx
+import React, { useState } from 'react';
+import ReactIconsSelect from 'react-icons-select';
+
+function App() {
+  const [selectedIcon, setSelectedIcon] = useState('');
+  
+  return (
+    <div>
+      <ReactIconsSelect 
+        value={selectedIcon} 
+        onChange={setSelectedIcon}
+        maxResults={30} // Show more search results
+      />
+    </div>
+  );
+}
+```
+
+This is especially useful when working with larger icon libraries and you want to see more options in the search results.
+
 ## API Reference
 
-### `IconSelectorDialog`
+### `ReactIconsSelect`
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `isOpen` | boolean | required | Controls the visibility of the dialog |
-| `onClose` | () => void | required | Function to call when the dialog is closed |
 | `value` | string | undefined | Currently selected icon name |
 | `onChange` | (value: string) => void | undefined | Function to call when an icon is selected |
-| `iconOptions` | string[] | undefined | Custom list of icon names to display |
-| `maxResults` | number | 12 | Maximum number of results to show when searching |
+| `text` | string | 'Select an Icon' | Text to display when no icon is selected |
+| `onClick` | () => void | undefined | Additional click handler for the button |
+| `darkMode` | boolean | auto-detect | Enable dark mode styling |
+| `buttonStyle` | ButtonStyleProps | {} | Custom styling for the button |
+| `showLibrarySelection` | boolean | true | Show or hide the library filter buttons in the dialog |
 | `defaultIconOptions` | string[] | (12 common icons) | Default icons to show when no search is active |
+| `maxResults` | number | 12 | Maximum number of results to show when searching |
+
+### `ButtonStyleProps`
+
+```typescript
+interface ButtonStyleProps {
+  box?: React.CSSProperties;  // Styles for the button container
+  icon?: React.CSSProperties; // Styles for the icon container
+  text?: React.CSSProperties; // Styles for the text
+}
+```
 
 ### `IconComponent`
 
@@ -166,4 +305,8 @@ MIT © Walter Cheng
 
 ## Contributing
 
-Contributions are welcome! Feel free to open an issue or submit a pull request. 
+Contributions are welcome! Feel free to open an issue or submit a pull request.
+
+## Disclaimer
+
+This project was created with the assistance of AI tools for quicker development. Please understand that most of the content, including code and documentation, was AI-generated. If you're considering contributing to this project, it's important to be aware of this approach to development. While this method accelerates the initial creation process, your human expertise and refinement are valuable for maintaining and improving the quality of the codebase. 

@@ -11,6 +11,8 @@ export interface IconSelectDialogProps {
   onClose: () => void;
   maxResults?: number; // Maximum number of results to show when searching
   defaultIconOptions?: string[]; // Default icons to show when no search is active
+  darkMode?: boolean; // Add dark mode prop
+  showLibrarySelection?: boolean; // Option to show or hide library selection
 }
 
 export const IconSelectDialog: React.FC<IconSelectDialogProps> = ({
@@ -20,7 +22,9 @@ export const IconSelectDialog: React.FC<IconSelectDialogProps> = ({
   isOpen,
   onClose,
   maxResults = 12, // Default to 12 results
-  defaultIconOptions = DEFAULT_ICON_OPTIONS
+  defaultIconOptions = DEFAULT_ICON_OPTIONS,
+  darkMode = false,
+  showLibrarySelection = true // Default to showing library selection
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -104,10 +108,13 @@ export const IconSelectDialog: React.FC<IconSelectDialogProps> = ({
         left: '50%',
         transform: 'translate(-50%, 0%)',
         margin: 'auto',
-        backgroundColor: 'white',
+        backgroundColor: darkMode ? '#1f2937' : 'white',
+        color: darkMode ? '#e5e7eb' : '#1f2937',
         borderRadius: '16px',
-        border: '2px solid #4f46e5',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+        border: `2px solid ${darkMode ? '#6366f1' : '#4f46e5'}`,
+        boxShadow: darkMode 
+          ? '0 25px 50px -12px rgba(0, 0, 0, 0.5)' 
+          : '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
         maxWidth: '90vw',
         maxHeight: '85vh',
         overflow: 'auto'
@@ -121,7 +128,7 @@ export const IconSelectDialog: React.FC<IconSelectDialogProps> = ({
       <style>
         {`
           dialog::backdrop {
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: ${darkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(0, 0, 0, 0.6)'};
           }
         `}
       </style>
@@ -130,7 +137,8 @@ export const IconSelectDialog: React.FC<IconSelectDialogProps> = ({
           <h2 style={{ 
             fontSize: '1.5rem', 
             fontWeight: 'bold', 
-            textAlign: 'center' 
+            textAlign: 'center',
+            color: darkMode ? '#e5e7eb' : '#1f2937'
           }}>
             Select an Icon
           </h2>
@@ -146,18 +154,18 @@ export const IconSelectDialog: React.FC<IconSelectDialogProps> = ({
               alignItems: 'center',
               justifyContent: 'center',
               borderRadius: '9999px',
-              color: '#6b7280',
+              color: darkMode ? '#9ca3af' : '#6b7280',
               cursor: 'pointer',
               transition: 'all 150ms',
               background: 'none',
               border: 'none'
             }}
             onMouseOver={(e) => {
-              e.currentTarget.style.color = '#374151';
-              e.currentTarget.style.backgroundColor = '#f3f4f6';
+              e.currentTarget.style.color = darkMode ? '#e5e7eb' : '#374151';
+              e.currentTarget.style.backgroundColor = darkMode ? '#374151' : '#f3f4f6';
             }}
             onMouseOut={(e) => {
-              e.currentTarget.style.color = '#6b7280';
+              e.currentTarget.style.color = darkMode ? '#9ca3af' : '#6b7280';
               e.currentTarget.style.backgroundColor = 'transparent';
             }}
           >
@@ -176,22 +184,26 @@ export const IconSelectDialog: React.FC<IconSelectDialogProps> = ({
               width: '100%',
               padding: '0.75rem',
               borderRadius: '0.5rem',
-              border: '1px solid #e5e7eb',
+              border: `1px solid ${darkMode ? '#4b5563' : '#e5e7eb'}`,
               fontSize: '1rem',
               outline: 'none',
+              backgroundColor: darkMode ? '#374151' : 'white',
+              color: darkMode ? '#e5e7eb' : '#1f2937',
               transition: 'border-color 150ms ease',
             }}
             onFocus={(e) => {
-              e.target.style.borderColor = '#4f46e5';
-              e.target.style.boxShadow = '0 0 0 3px rgba(79, 70, 229, 0.2)';
+              e.target.style.borderColor = darkMode ? '#6366f1' : '#4f46e5';
+              e.target.style.boxShadow = darkMode 
+                ? '0 0 0 3px rgba(99, 102, 241, 0.3)' 
+                : '0 0 0 3px rgba(79, 70, 229, 0.2)';
             }}
             onBlur={(e) => {
-              e.target.style.borderColor = '#e5e7eb';
+              e.target.style.borderColor = darkMode ? '#4b5563' : '#e5e7eb';
               e.target.style.boxShadow = 'none';
             }}
           />
           
-          <div style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '0.5rem' }}>
+          <div style={{ fontSize: '0.75rem', color: darkMode ? '#9ca3af' : '#6b7280', marginTop: '0.5rem' }}>
             {filteredIcons.length > 0 
               ? `Showing ${filteredIcons.length} icons ${searchTerm ? `matching "${searchTerm}"` : ''}${selectedPack ? ` from ${selectedPack}` : ''}`
               : 'No icons found'}
@@ -206,8 +218,8 @@ export const IconSelectDialog: React.FC<IconSelectDialogProps> = ({
           marginTop: '1rem',
           height: '320px',
           overflowY: 'auto',
-          borderTop: '1px solid #e5e7eb',
-          borderBottom: '1px solid #e5e7eb',
+          borderTop: `1px solid ${darkMode ? '#4b5563' : '#e5e7eb'}`,
+          borderBottom: `1px solid ${darkMode ? '#4b5563' : '#e5e7eb'}`,
           padding: '1rem 0'
         }}>
           {isLoading ? (
@@ -215,7 +227,7 @@ export const IconSelectDialog: React.FC<IconSelectDialogProps> = ({
               gridColumn: 'span 4', 
               textAlign: 'center', 
               padding: '2rem',
-              color: '#6b7280'
+              color: darkMode ? '#9ca3af' : '#6b7280'
             }}>
               Loading icons...
             </div>
@@ -233,21 +245,28 @@ export const IconSelectDialog: React.FC<IconSelectDialogProps> = ({
                   width: BUTTON_SIZE,
                   height: BUTTON_SIZE,
                   borderRadius: '0.5rem',
-                  border: value === icon ? '1px solid #3b82f6' : '1px solid #e5e7eb',
-                  backgroundColor: value === icon ? '#eff6ff' : 'white',
+                  border: value === icon 
+                    ? `1px solid ${darkMode ? '#6366f1' : '#3b82f6'}`
+                    : `1px solid ${darkMode ? '#4b5563' : '#e5e7eb'}`,
+                  backgroundColor: value === icon 
+                    ? darkMode ? '#3730a3' : '#eff6ff' 
+                    : darkMode ? '#1f2937' : 'white',
+                  color: darkMode ? '#e5e7eb' : '#1f2937',
                   transition: 'all 150ms',
                   cursor: 'pointer'
                 }}
                 onClick={() => handleIconPick(icon)}
                 onMouseOver={(e) => {
                   if (value !== icon) {
-                    e.currentTarget.style.backgroundColor = '#f9fafb';
-                    e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+                    e.currentTarget.style.backgroundColor = darkMode ? '#374151' : '#f9fafb';
+                    e.currentTarget.style.boxShadow = darkMode 
+                      ? '0 4px 6px -1px rgba(0, 0, 0, 0.5)' 
+                      : '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
                   }
                 }}
                 onMouseOut={(e) => {
                   if (value !== icon) {
-                    e.currentTarget.style.backgroundColor = 'white';
+                    e.currentTarget.style.backgroundColor = darkMode ? '#1f2937' : 'white';
                     e.currentTarget.style.boxShadow = 'none';
                   }
                 }}
@@ -258,17 +277,18 @@ export const IconSelectDialog: React.FC<IconSelectDialogProps> = ({
                   justifyContent: 'center',
                   height: ICON_SIZE,
                   width: ICON_SIZE,
-                  marginBottom: '0.5rem'
+                  marginBottom: '0.25rem'
                 }}>
-                  <IconComponent iconName={icon} size={ICON_SIZE} />
+                  <IconComponent iconName={icon} size={ICON_SIZE} color={darkMode ? '#e5e7eb' : undefined} />
                 </div>
                 <span style={{ 
-                  fontSize: '0.75rem',
+                  fontSize: '0.65rem',
                   textAlign: 'center',
                   width: '100%',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
-                  whiteSpace: 'nowrap'
+                  whiteSpace: 'nowrap',
+                  color: darkMode ? '#9ca3af' : '#6b7280'
                 }}>
                   {icon}
                 </span>
@@ -279,67 +299,73 @@ export const IconSelectDialog: React.FC<IconSelectDialogProps> = ({
               gridColumn: 'span 4', 
               textAlign: 'center', 
               padding: '2rem',
-              color: '#6b7280'
+              color: darkMode ? '#9ca3af' : '#6b7280'
             }}>
               No icons found matching "{searchTerm}"
             </div>
           )}
         </div>
         
-        {/* Library selection */}
-        <div style={{ marginTop: '1rem' }}>
-            <div style={{ 
-              fontSize: '0.875rem', 
-              fontWeight: 'bold', 
-              marginBottom: '0.5rem',
-              color: '#374151'
-            }}>
-              Filter by Library
-            </div>
-            <div style={{ 
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '0.5rem',
-              maxHeight: '120px',
-              overflowY: 'auto',
-              padding: '0.5rem 0'
-            }}>
+        {/* Library filter - conditionally rendered based on showLibrarySelection */}
+        {showLibrarySelection && (
+          <div style={{ 
+            marginTop: '1rem',
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '0.5rem',
+            justifyContent: 'center'
+          }}>
+            <button
+              type="button"
+              style={{
+                padding: '0.5rem 0.75rem',
+                borderRadius: '0.375rem',
+                fontSize: '0.8rem',
+                fontWeight: selectedPack === undefined ? 'bold' : 'normal',
+                backgroundColor: selectedPack === undefined 
+                  ? darkMode ? '#4f46e5' : '#eff6ff' 
+                  : darkMode ? '#374151' : 'white',
+                color: selectedPack === undefined 
+                  ? darkMode ? 'white' : '#3b82f6' 
+                  : darkMode ? '#e5e7eb' : '#1f2937',
+                border: `1px solid ${darkMode ? '#4b5563' : '#e5e7eb'}`,
+                cursor: 'pointer',
+                transition: 'all 150ms'
+              }}
+              onClick={() => handleLibrarySelect(undefined)}
+            >
+              All
+            </button>
+            
+            {Object.keys(iconPacks).map((pack) => (
               <button
-                onClick={() => handleLibrarySelect(undefined)}
+                key={pack}
+                type="button"
                 style={{
-                  padding: '0.4rem 0.75rem',
-                  borderRadius: '9999px',
-                  fontSize: '0.75rem',
-                  fontWeight: selectedPack === undefined ? 'bold' : 'normal',
-                  backgroundColor: selectedPack === undefined ? '#4f46e5' : '#f3f4f6',
-                  color: selectedPack === undefined ? 'white' : '#374151',
-                  border: 'none',
-                  cursor: 'pointer'
+                  padding: '0.5rem 0.75rem',
+                  borderRadius: '0.375rem',
+                  fontSize: '0.8rem',
+                  fontWeight: selectedPack === pack ? 'bold' : 'normal',
+                  backgroundColor: selectedPack === pack 
+                    ? darkMode ? '#4f46e5' : '#eff6ff' 
+                    : darkMode ? '#374151' : 'white',
+                  color: selectedPack === pack 
+                    ? darkMode ? 'white' : '#3b82f6' 
+                    : darkMode ? '#e5e7eb' : '#1f2937',
+                  border: `1px solid ${darkMode ? '#4b5563' : '#e5e7eb'}`,
+                  cursor: 'pointer',
+                  transition: 'all 150ms'
                 }}
+                onClick={() => handleLibrarySelect(pack)}
               >
-                All
+                {pack}
               </button>
-              {Object.keys(iconPacks).map(packName => (
-                <button
-                  key={packName}
-                  onClick={() => handleLibrarySelect(packName)}
-                  style={{
-                    padding: '0.4rem 0.75rem',
-                    borderRadius: '9999px',
-                    fontSize: '0.75rem',
-                    fontWeight: selectedPack === packName ? 'bold' : 'normal',
-                    backgroundColor: selectedPack === packName ? '#4f46e5' : '#f3f4f6',
-                    color: selectedPack === packName ? 'white' : '#374151',
-                    border: 'none',
-                    cursor: 'pointer'
-                  }}
-                >
-                  {packName}
-                </button>
-              ))}
-            </div>
+            ))}
           </div>
-        </div>
-      </dialog>
+        )}
+      </div>
+    </dialog>
   );
-}; 
+};
+
+export default IconSelectDialog; 
