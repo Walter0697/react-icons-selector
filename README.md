@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/npm/v/react-icons-select" alt="npm version" />
   <img src="https://img.shields.io/bundlephobia/minzip/react-icons-select" alt="bundle size" />
   <img src="https://img.shields.io/npm/l/react-icons-select" alt="license" />
-  <img src="https://img.shields.io/github/actions/workflow/status/waltercheng/react-icons-selector/master.yml?branch=master" alt="build status" />
+  <img src="https://img.shields.io/github/actions/workflow/status/waltercheng/react-icons-selector/ci.yml?branch=master" alt="build status" />
   <img src="https://img.shields.io/npm/dm/react-icons-select" alt="downloads" />
 </p>
 
