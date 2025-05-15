@@ -1,12 +1,12 @@
-import { ReactIconsSelector } from './src/components/ReactIconsSelector';
+import { ReactIconsSelect } from './src/components/ReactIconsSelect';
 import { IconComponent, getIconComponent } from './src/components/getIconComponent';
-import { IconSelectorDialog } from './src/components/IconSelectorDialog';
+import { IconSelectDialog } from './src/components/IconSelectDialog';
 
 export {
-  ReactIconsSelector,
+  ReactIconsSelect,
   IconComponent,
   getIconComponent,
-  IconSelectorDialog
+  IconSelectDialog
 };
 
-export default ReactIconsSelector; 
+export default ReactIconsSelect; 

@@ -5,11 +5,11 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/npm/v/react-icons-selector" alt="npm version" />
-  <img src="https://img.shields.io/bundlephobia/minzip/react-icons-selector" alt="bundle size" />
-  <img src="https://img.shields.io/npm/l/react-icons-selector" alt="license" />
-  <img src="https://img.shields.io/github/actions/workflow/status/waltercheng/react-icons-selector/main.yml" alt="build status" />
-  <img src="https://img.shields.io/npm/dm/react-icons-selector" alt="downloads" />
+  <img src="https://img.shields.io/npm/v/ReactIconsSelect" alt="npm version" />
+  <img src="https://img.shields.io/bundlephobia/minzip/ReactIconsSelect" alt="bundle size" />
+  <img src="https://img.shields.io/npm/l/ReactIconsSelect" alt="license" />
+  <img src="https://img.shields.io/github/actions/workflow/status/waltercheng/react-icons-select/main.yml" alt="build status" />
+  <img src="https://img.shields.io/npm/dm/ReactIconsSelect" alt="downloads" />
 </p>
 
 A modern, lightweight React component for selecting icons from the popular [react-icons](https://react-icons.github.io/react-icons/) library.
@@ -37,13 +37,13 @@ While there are other icon selector libraries available, many have become outdat
 
 ```bash
 # npm
-npm install react-icons-selector react-icons
+npm install ReactIconsSelect react-icons
 
 # yarn
-yarn add react-icons-selector react-icons
+yarn add ReactIconsSelect react-icons
 
 # pnpm
-pnpm add react-icons-selector react-icons
+pnpm add ReactIconsSelect react-icons
 ```
 
 Note: `react-icons` is a peer dependency and needs to be installed separately.
@@ -54,8 +54,8 @@ Note: `react-icons` is a peer dependency and needs to be installed separately.
 
 ```jsx
 import React, { useState } from 'react';
-import { IconSelectorDialog } from 'react-icons-selector';
-import { IconComponent } from 'react-icons-selector';
+import { IconSelectorDialog } from 'ReactIconsSelect';
+import { IconComponent } from 'ReactIconsSelect';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -89,8 +89,8 @@ function App() {
 
 ```jsx
 import React, { useState } from 'react';
-import { IconSelectorDialog } from 'react-icons-selector';
-import { IconComponent } from 'react-icons-selector';
+import { IconSelectorDialog } from 'ReactIconsSelect';
+import { IconComponent } from 'ReactIconsSelect';
 
 const MY_FAVORITE_ICONS = ["FaReact", "FaGithub", "MdDarkMode", "BiCodeBlock"];
 

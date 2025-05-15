@@ -3,7 +3,7 @@ import { IconComponent } from './getIconComponent';
 import { getAllIconNames, searchIcons, iconPacks } from './getAllIcons';
 import { DEFAULT_ICON_OPTIONS } from './defaultIconOptions';
 
-export interface IconSelectorDialogProps {
+export interface IconSelectDialogProps {
   value?: string;
   onChange?: (value: string) => void;
   iconOptions?: string[];
@@ -13,7 +13,7 @@ export interface IconSelectorDialogProps {
   defaultIconOptions?: string[]; // Default icons to show when no search is active
 }
 
-export const IconSelectorDialog: React.FC<IconSelectorDialogProps> = ({
+export const IconSelectDialog: React.FC<IconSelectDialogProps> = ({
   value,
   onChange,
   iconOptions,

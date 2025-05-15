@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { IconComponent } from './getIconComponent';
-import { IconSelectorDialog } from './IconSelectorDialog';
+import { IconSelectDialog } from './IconSelectDialog';
 
-export interface ReactIconsSelectorProps {
+export interface ReactIconsSelectProps {
   value?: string; // Icon name
   onChange?: (value: string) => void; // Function to change the icon name
   text?: string;
@@ -22,7 +22,7 @@ const ICON_OPTIONS = [
   'IoIosBasket',
 ];
 
-export const ReactIconsSelector: React.FC<ReactIconsSelectorProps> = ({ value, onChange, text, onClick }) => {
+export const ReactIconsSelect: React.FC<ReactIconsSelectProps> = ({ value, onChange, text, onClick }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleButtonClick = () => {
@@ -94,7 +94,7 @@ export const ReactIconsSelector: React.FC<ReactIconsSelectorProps> = ({ value, o
         )}
       </button>
       
-      <IconSelectorDialog
+      <IconSelectDialog
         value={value}
         onChange={onChange}
         iconOptions={ICON_OPTIONS}
@@ -105,4 +105,4 @@ export const ReactIconsSelector: React.FC<ReactIconsSelectorProps> = ({ value, o
   );
 };
 
-export default ReactIconsSelector; 
+export default ReactIconsSelect; 
