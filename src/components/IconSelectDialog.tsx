@@ -111,8 +111,6 @@ export const IconSelectDialog: React.FC<IconSelectDialogProps> = ({
       style={{
         padding: '1.5rem',
         position: 'fixed',
-        left: '50%',
-        transform: 'translate(-50%, 0%)',
         margin: 'auto',
         backgroundColor: darkMode ? '#1f2937' : 'white',
         color: darkMode ? '#e5e7eb' : '#1f2937',
@@ -226,7 +224,8 @@ export const IconSelectDialog: React.FC<IconSelectDialogProps> = ({
           overflowY: 'auto',
           borderTop: `1px solid ${darkMode ? '#4b5563' : '#e5e7eb'}`,
           borderBottom: `1px solid ${darkMode ? '#4b5563' : '#e5e7eb'}`,
-          padding: '1rem 0'
+          padding: '1rem 0',
+          justifyItems: 'center'
         }}>
           {isLoading ? (
             <div style={{ 
