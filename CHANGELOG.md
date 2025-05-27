@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.0](https://github.com/Walter0697/react-icons-select/compare/v0.0.7...v0.1.0) (2025-05-27)
+
+
+### Features
+
+* fixing centering issue ([2023358](https://github.com/Walter0697/react-icons-select/commit/20233585b8f5435e606b36d135d8169fa80acdc2))
+* fixing readme.md for workflow ([b45efe1](https://github.com/Walter0697/react-icons-select/commit/b45efe12201f977f584bcf5b721919be2e01df7f))
+* updating license and dependabot ([9bb396a](https://github.com/Walter0697/react-icons-select/commit/9bb396a5bd9582203e7d48b3b2b0feb06f841e01))
+
 ### [0.0.7](https://github.com/Walter0697/react-icons-select/compare/v0.0.6...v0.0.7) (2025-05-15)
 
 
